@@ -1,8 +1,22 @@
 package org.inwork;
 
-public class Program {
-    public static void main(String[] args) {
+import java.util.Random;
 
-        System.out.println("Hello world!");
+public class Program {
+    private static final Random random = new Random();
+    private static final int CHAR_BOUND_L = 65;
+    private static final int CHAR_BOUND_H = 90;
+
+    public static void main(String[] args) {
+        System.out.println(generateSymbols(15));
+
+    }
+
+    private static String generateSymbols(int amount){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < amount; i++) {
+            stringBuilder.append((char) random.nextInt(CHAR_BOUND_L,CHAR_BOUND_H+1));
+        }
+        return stringBuilder.toString();
     }
 }
