@@ -19,6 +19,8 @@ public class Program {
         concatenate("s5sample.txt", "s5sample2.txt","s5sampleOut.txt");
         System.out.println(searchStrInFile("s5sampleOut.txt", TO_SEARCH));
 
+        outputFileSystem(new File("."), "", true);
+
     }
 
     public static void outputFileSystem(File file, String indent, boolean isLast){
@@ -32,7 +34,22 @@ public class Program {
             indent += "│ ";
         }
         System.out.println(file.getName());
+
         File[] files = file.listFiles();
+        if(files == null) return;
+
+        int subDir = 0;
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory()) subDir++;
+
+        }
+        int subDirCounter = 0;
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory()){
+                outputFileSystem(files[i], indent, subDirCounter == subDir - 1);
+                subDirCounter++;
+            }
+        }
 
 
     }
