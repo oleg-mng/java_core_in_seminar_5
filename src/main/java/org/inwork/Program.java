@@ -19,15 +19,15 @@ public class Program {
         concatenate("s5sample.txt", "s5sample2.txt","s5sampleOut.txt");
         System.out.println(searchStrInFile("s5sampleOut.txt", TO_SEARCH));
 
-        outputFileSystem(new File("."), "", true);
+        outputFileSystem(new File("."), "", false);
 
     }
 
     public static void outputFileSystem(File file, String indent, boolean isLast){
-        System.out.println(indent);
+        System.out.print(indent);
         if (isLast) {
-            System.out.print("└ ");
-            indent += "  ";
+            System.out.print("└");
+            indent += " ";
         }
         else {
             System.out.print("├");
