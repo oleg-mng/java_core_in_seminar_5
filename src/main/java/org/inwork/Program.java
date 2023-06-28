@@ -23,7 +23,8 @@ public class Program {
         concatenate("s5sample.txt", "s5sample2.txt", "s5sampleOut.txt");
         System.out.println(searchStrInFile("s5sampleOut.txt", TO_SEARCH));
 
-        outputFileSystem(new File("."), "", false);
+        outputFileSystem(new File("/Users/olegmonogarov/IdeaProjects/java_core_in_seminar_5/target"),
+                "", true);
 
         String[] fileNames = new String[10];
         for (int i = 0; i < fileNames.length; i++) {
@@ -36,8 +37,6 @@ public class Program {
             System.out.printf("Файл %s содержит искомое слово %s\n", s, TO_SEARCH);
 
         }
-
-
 
     }
 
@@ -58,17 +57,21 @@ public class Program {
         int subDir = 0;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) subDir++;
-
+//            else{
+//
+//            }
         }
         int subDirCounter = 0;
+        int subFileCounter = 0;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
                 outputFileSystem(files[i], indent, subDirCounter == subDir - 1);
                 subDirCounter++;
             }
+            else{
+                outputFileSystem(files[i], indent, subFileCounter == files.length - subDir - 1);
+            }
         }
-
-
     }
 
     private static String generateSymbols(int amount) {
