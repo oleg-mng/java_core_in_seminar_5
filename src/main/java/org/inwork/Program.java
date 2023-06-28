@@ -12,8 +12,6 @@ public class Program {
     private static final String TO_SEARCH = "GeekBrains";
 
 
-
-
     public static void main(String[] args) throws IOException {
         System.out.println(generateSymbols(15));
         writeFileContents("s5sample.txt", 30);
@@ -23,30 +21,28 @@ public class Program {
         concatenate("s5sample.txt", "s5sample2.txt", "s5sampleOut.txt");
         System.out.println(searchStrInFile("s5sampleOut.txt", TO_SEARCH));
 
-        outputFileSystem(new File("/Users/olegmonogarov/IdeaProjects/java_core_in_seminar_5/target"),
+        outputFileSystem(new File("/Users/olegmonogarov/IdeaProjects/java_core_in_seminar_5"),
                 "", true);
 
         String[] fileNames = new String[10];
         for (int i = 0; i < fileNames.length; i++) {
             fileNames[i] = "file_" + i + ".txt";
-            writeFileContents2(fileNames[i],100, 4);
+            writeFileContents2(fileNames[i], 100, 4);
             System.out.printf("Файл %s создан\n", fileNames[i]);
         }
         List<String> result = searchMatch(fileNames, TO_SEARCH);
-        for (String s: result) {
+        for (String s : result) {
             System.out.printf("Файл %s содержит искомое слово %s\n", s, TO_SEARCH);
-
         }
-
     }
 
     public static void outputFileSystem(File file, String indent, boolean isLast) {
         System.out.print(indent);
         if (isLast) {
-            System.out.print("└");
+            System.out.print("└╌ ");
             indent += " ";
         } else {
-            System.out.print("├");
+            System.out.print("├╌ ");
             indent += "│ ";
         }
         System.out.println(file.getName());
@@ -57,19 +53,18 @@ public class Program {
         int subDir = 0;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) subDir++;
-//            else{
-//
-//            }
         }
+
         int subDirCounter = 0;
         int subFileCounter = 0;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
                 outputFileSystem(files[i], indent, subDirCounter == subDir - 1);
                 subDirCounter++;
-            }
-            else{
-                outputFileSystem(files[i], indent, subFileCounter == files.length - subDir - 1);
+
+            } else {
+                outputFileSystem(files[i], indent, true);
+//                subFileCounter++;
             }
         }
     }
